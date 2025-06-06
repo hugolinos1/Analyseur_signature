@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PDF Signature Analyzer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        font-family: 'Inter', sans-serif; /* A common, clean sans-serif font */
+      }
+      /* Custom scrollbar styles that were previously in ResultsDisplay.tsx */
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent; /* Or a very dark slate like #1e293b (slate-800) if needed */
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #38bdf8; /* sky-500 */
+        border-radius: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #0ea5e9; /* sky-600 */
+      }
+      /* For Firefox */
+      .custom-scrollbar {
+        scrollbar-width: thin;
+        scrollbar-color: #38bdf8 transparent; /* thumb and track color */
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.1.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+    "pdfjs-dist/": "https://esm.sh/pdfjs-dist@^5.3.31/",
+    "react/": "https://esm.sh/react@^19.1.0/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.4.0"
+  }
+}
+</script>
+<!-- 
+  POUR LE DÉVELOPPEMENT LOCAL UNIQUEMENT :
+  Décommentez le bloc <script> ci-dessous et remplacez "VOTRE_CLÉ_API_GEMINI_LOCALE_ICI" 
+  par votre véritable clé API Gemini. Cela rendra la clé disponible via process.env.API_KEY
+  pour votre application lorsqu'elle s'exécute localement.
+
+  IMPORTANT : 
+  - NE COMMETTEZ JAMAIS CE FICHIER (index.html) AVEC VOTRE CLÉ API DÉCOMMENTÉE ET INSÉRÉE.
+  - Pour le déploiement (par exemple sur Cloud Run), la clé API doit être configurée 
+    en tant que variable d'environnement du service, ou le compte de service de Cloud Run 
+    doit avoir les permissions nécessaires pour accéder à l'API Gemini.
+-->
+<!--
+<script>
+  window.process = {
+    env: {
+      API_KEY: "VOTRE_CLÉ_API_GEMINI_LOCALE_ICI"
+    }
+  };
+</script>
+-->
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-slate-900">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>

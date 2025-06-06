@@ -1,0 +1,5 @@
+{
+  "name": "PDF Signature Analyzer",
+  "description": "An application to analyze PDF documents for signatures and annotations using AI (Gemini).",
+  "requestFramePermissions": []
+}
