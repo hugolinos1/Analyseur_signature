@@ -1,0 +1,7 @@
+[build]
+  functions = "netlify/functions" # Assurez-vous que cela correspond à votre structure de dossier
+
+# Si vous n'avez pas d'autres plugins, vous pouvez omettre la section plugins.
+# Le plugin suivant peut aider à installer correctement les dépendances des fonctions.
+# [[plugins]]
+#  package = "@netlify/plugin-functions-install-core"
