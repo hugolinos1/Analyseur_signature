@@ -2,7 +2,7 @@ import type { TextPart, InlineDataPart, AnalysisResult, Finding, GeminiAnalysisR
 import { GoogleGenAI } from "@google/genai"; // Keep for translation
 
 // API Key for client-side translation - to be set in .env as VITE_GEMINI_API_KEY
-const TRANSLATION_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+const TRANSLATION_API_KEY = import.meta.env.VITE_GEMINI_API_KEY; 
 
 let translationGenAI: GoogleGenAI | null = null;
 if (TRANSLATION_API_KEY) {
@@ -67,12 +67,12 @@ Ensure the output is a valid JSON object.
         contents: [{ role: "user", parts: [{text: translationPrompt}] }], // Ensure contents structure is correct
         generationConfig: { // Using generationConfig
             responseMimeType: "application/json",
-            temperature: 0.2,
+            temperature: 0.2, 
         },
     });
     const response = result.response;
     let jsonStr = response.text().trim();
-
+    
     const fenceRegex = /^```(\w*)?\s*
 ?(.*?)
 ?\s*```$/s;
@@ -127,11 +127,11 @@ export const analyzeDocumentWithGemini = async (pageImagesBase64: string[]): Pro
       console.error("Error from Netlify function:", errorBody);
       throw new Error(`Analysis request failed with status ${response.status}: ${errorBody?.details || response.statusText}`);
     }
-
+    
     // The Netlify function should already return a stringified JSON.
     // If it's double-encoded, this might need adjustment.
     // Assuming Netlify function returns the direct string response from Gemini, which is already JSON.
-    return await response.text();
+    return await response.text(); 
   } catch (error) {
     console.error("Error calling Netlify function for analysis:", error);
     if (error instanceof Error) {
