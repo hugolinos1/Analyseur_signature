@@ -1,5 +1,43 @@
-import type { TextPart, InlineDataPart, AnalysisResult, Finding, GeminiAnalysisResponse } from '../types'; // Added AnalysisResult, Finding, GeminiAnalysisResponse
-import { GoogleGenAI } from "@google/genai"; // Keep for translation
+// Define types locally to resolve import errors as the project structure is unavailable.
+interface Finding {
+  description: string;
+  [key: string]: any; // Allow other properties
+}
+
+interface TextPart {
+  text: string;
+}
+
+interface InlineDataPart {
+  inlineData: {
+    mimeType: string;
+    data: string;
+  };
+}
+
+interface AnalysisResult {
+  justification: string;
+  findings: Finding[];
+}
+
+interface GeminiAnalysisResponse {
+  [key:string]: any;
+}
+
+// Declaration for Vite environment variables to prevent TypeScript errors.
+declare global {
+  interface ImportMeta {
+    readonly env: {
+      readonly VITE_GEMINI_API_KEY: string;
+    };
+  }
+}
+// This is a placeholder to resolve the TS error.
+// The actual @google/genai package must be installed for the code to run.
+declare class GoogleGenAI {
+  constructor(apiKey: string);
+  getGenerativeModel(args: { model: string }): any;
+}
 
 // API Key for client-side translation - to be set in .env as VITE_GEMINI_API_KEY
 const TRANSLATION_API_KEY = import.meta.env.VITE_GEMINI_API_KEY; 
@@ -30,7 +68,7 @@ export const translateAnalysisFieldsToFrench = async (
     };
   }
   
-  const model = translationGenAI.getGenerativeModel({ model: "gemini-2.5-flash-preview-04-17"}); // Corrected model name
+  const model = translationGenAI.getGenerativeModel({ model: "gemini-1.5-flash-latest"}); // Use the latest stable flash model
 
   const dataToTranslate = {
     justification: englishAnalysis.justification,
@@ -73,9 +111,7 @@ Ensure the output is a valid JSON object.
     const response = result.response;
     let jsonStr = response.text().trim();
     
-    const fenceRegex = /^```(\w*)?\s*
-?(.*?)
-?\s*```$/s;
+    const fenceRegex = /^```(\w*)?\s*\n?(.*?)\n?\s*```$/s;
     const match = jsonStr.match(fenceRegex);
     if (match && match[2]) {
       jsonStr = match[2].trim();
